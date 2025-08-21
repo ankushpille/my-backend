@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 
 app.use(cors());
+app.use(express.json()); // ✅ parse JSON body
 
 
 const todos = [
@@ -18,13 +19,13 @@ app.get('/todos',(req,res) => {
 app.post('/todos',(req,res) => {
     const newTodo = {
         id: todos.length +1,
-        task:req.body.task,
+        task:req.body.task || "default task",
         completed:false
     }
     todos.push(newTodo);
     res.status(201).json(newTodo);
 })
 
-app.listen(3000,() => {
-    console.log("server running on port 3000")
+app.listen(4000,() => {
+    console.log("server running on port 4000")
 })
